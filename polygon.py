@@ -1,5 +1,9 @@
 import math 
 class Polygon(object):
+    """
+    Base class for Polygon that includes the code to generate polygon 
+    properties 
+    """
     def __init__(self, n,r):
         if type(n) == int:
             if n > 2:
