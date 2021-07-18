@@ -12,36 +12,57 @@ class Polygon(object):
             self.r = r
         else:
             raise TypeError("radius need to be number either a float or integer")
-
-    def interiorAngle(self):
+            
+    @property
+    def interior_angle(self):
         return (self.n-2)*180/ self.n
     
-    def edgeLength(self):
+    @property
+    def side_length(self):
         return 2*self.r*math.sin(math.pi/self.n)
     
+    @property
     def apothem(self):
         return self.r * math.cos(math.pi/self.n)
     
+    @property
     def area(self):
-        return 1/2 * self.n * self.edgeLength() * self.apothem()
+        return 1/2 * self.n * self.side_length * self.apothem
     
+    @property
     def perimeter(self):
-        return self.n * self.edgeLength()
+        return self.n * self.side_length
+
+    @property
+    def count_vertices(self):
+        return self.n
+    
+    @property
+    def count_edges(self):
+        return self.n
+    
+    @property
+    def circumradius(self):
+        return self.r
+
 
     def __eq__(self,other):
-        if self.n == other.n and self.r == other.r:
-            return True
+        if isinstance(other, self.__class__):
+            if self.n == other.n and self.r == other.r:
+                return True
+            else:
+                return False
         else:
-            return False
+            return NotImplemented
     
     def __repr__(self):
-        return f"number of vertices {self.n} and circumradius is {self.r}"
+        return f'Polygon(n={self.n}, R={self.r})'
     
     def __gt__(self,other):
         return self.n > other.n
         
 p1 = Polygon(4,3)
 p2 = Polygon(5,3)
-print(p1.area())
+print(p1.area)
 print(p2)
 print(p1>p2)
